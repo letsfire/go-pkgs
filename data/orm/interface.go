@@ -44,6 +44,7 @@ type Condition struct {
 	Paging      Paging
 	GroupBy     []string
 	OrderBy     []OrderBy
+	FieldExps   []string
 	WithDeleted bool
 }
 

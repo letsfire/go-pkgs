@@ -27,6 +27,11 @@ func (c *Condition) applyPostgresQuery(query *orm.Query) *orm.Query {
 	} else {
 		query.Column(c.Fields...)
 	}
+	if len(c.FieldExps) != 0 {
+		for _, field := range c.FieldExps {
+			query.ColumnExpr(field)
+		}
+	}
 	c.Where.applyPostgresQuery(query)
 	for _, orderBy := range c.OrderBy {
 		orderBy.applyPostgresQuery(query)
