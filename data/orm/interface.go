@@ -45,6 +45,7 @@ type Condition struct {
 	GroupBy     []string
 	OrderBy     []OrderBy
 	FieldExps   []string
+	Relations   map[string]*Condition
 	WithDeleted bool
 }
 
@@ -83,8 +84,13 @@ func (c *Condition) AddOrderExp(express string) *Condition {
 	return c
 }
 
-func (c *Condition) AddGroup(cols ...string) *Condition {
+func (c *Condition) SetGroup(cols ...string) *Condition {
 	c.GroupBy = cols
+	return c
+}
+
+func (c *Condition) AddRelation(name string, cond *Condition) *Condition {
+	c.Relations[name] = cond
 	return c
 }
 

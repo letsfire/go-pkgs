@@ -32,6 +32,16 @@ func (c *Condition) applyPostgresQuery(query *orm.Query) *orm.Query {
 			query.ColumnExpr(field)
 		}
 	}
+	if len(c.Relations) > 0 {
+		for name, cond := range c.Relations {
+			query.Relation(name, func(q *orm.Query) (*orm.Query, error) {
+				if cond == nil {
+					return q, nil
+				}
+				return cond.applyPostgresQuery(q), nil
+			})
+		}
+	}
 	c.Where.applyPostgresQuery(query)
 	for _, orderBy := range c.OrderBy {
 		orderBy.applyPostgresQuery(query)
