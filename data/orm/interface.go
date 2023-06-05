@@ -90,6 +90,9 @@ func (c *Condition) SetGroup(cols ...string) *Condition {
 }
 
 func (c *Condition) AddRelation(name string, cond *Condition) *Condition {
+	if c.Relations == nil {
+		c.Relations = make(map[string]*Condition, 0)
+	}
 	c.Relations[name] = cond
 	return c
 }
