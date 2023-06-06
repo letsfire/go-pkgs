@@ -22,9 +22,7 @@ func (l *Locker) applyPostgresQuery(query *orm.Query) *orm.Query {
 
 // applyPostgresQuery 应用查询条件
 func (c *Condition) applyPostgresQuery(query *orm.Query) *orm.Query {
-	if len(c.Fields) == 0 {
-		query.Column("*")
-	} else {
+	if len(c.Fields) > 0 {
 		query.Column(c.Fields...)
 	}
 	if len(c.FieldExps) != 0 {
