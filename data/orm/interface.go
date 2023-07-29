@@ -189,9 +189,9 @@ func (f *Filter) Condition(fields ...string) *Condition {
 // Filters 过滤集合
 type Filters []*Filter
 
-func (fs Filters) OrWhere() *Where { return OrWhere(nil, fs...) }
+func (fs Filters) Or() *Where { return OrWhere(nil, fs...) }
 
-func (fs Filters) AndWhere() *Where { return AndWhere(nil, fs...) }
+func (fs Filters) And() *Where { return AndWhere(nil, fs...) }
 
 // Paging 分页
 type Paging struct {
