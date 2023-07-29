@@ -2,13 +2,14 @@ package data
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 )
 
 type Center struct {
-	Redis    Redis
-	Postgres Postgres
-	Rabbitmq Rabbitmq
+	Redis      Redis
+	Postgres   Postgres
+	Rabbitmq   Rabbitmq
+	Zincsearch Zincsearch
 }
 
 func (c *Center) prepare() *Center {
@@ -26,7 +27,7 @@ func (c *Center) prepare() *Center {
 
 func LoadFromJsonFile(path string) *Center {
 	var center = new(Center)
-	bts, err := ioutil.ReadFile(path)
+	bts, err := os.ReadFile(path)
 	throwError(err, json.Unmarshal(bts, center))
 	return center.prepare()
 }
