@@ -105,7 +105,7 @@ func (p *postgres) UpdateLock(
 
 func (p *postgres) Increase(
 	ctx context.Context, model interface{},
-	kvs map[string]int, cond *Condition,
+	kvs map[string]int64, cond *Condition,
 ) (int, error) {
 	q := p.db.ModelContext(ctx, model)
 	if cond == nil {

@@ -20,7 +20,7 @@ type Interface interface {
 		ctx context.Context, w *Where, res interface{},
 		fn func(res interface{}, uw UnitWorkInterface) error,
 	) error
-	Increase(ctx context.Context, model interface{}, kvs map[string]int, cond *Condition) (int, error)
+	Increase(ctx context.Context, model interface{}, kvs map[string]int64, cond *Condition) (int, error)
 	UnitWork(ctx context.Context) UnitWorkInterface
 }
 
@@ -32,7 +32,7 @@ type UnitWorkInterface interface {
 	Update(model interface{}, cols ...string) UnitWorkInterface
 	UpdateSafe(model interface{}, locker *Locker, cols ...string) UnitWorkInterface
 	UpdateCond(model interface{}, kvs map[string]interface{}, cond *Condition) UnitWorkInterface
-	Increase(model interface{}, kvs map[string]int, cond *Condition) UnitWorkInterface
+	Increase(model interface{}, kvs map[string]int64, cond *Condition) UnitWorkInterface
 	Execute(check func(i, u, d, incr int) bool) error
 	ExecuteCheckAffected(affected int) error
 }

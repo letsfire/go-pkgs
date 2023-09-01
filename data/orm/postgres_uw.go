@@ -23,9 +23,9 @@ type condUpdateUnit struct {
 
 // increaseUnit 递增单元
 type increaseUnit struct {
-	model interface{}    // 业务模型
-	kvMap map[string]int // 更新数据
-	cond  *Condition     // 更新条件
+	model interface{}      // 业务模型
+	kvMap map[string]int64 // 更新数据
+	cond  *Condition       // 更新条件
 }
 
 // condDeleteUnit 条件删除
@@ -81,7 +81,7 @@ func (uw *UnitWork) UpdateCond(m interface{}, kvs map[string]interface{}, cond *
 	return uw
 }
 
-func (uw *UnitWork) Increase(model interface{}, kvs map[string]int, cond *Condition) UnitWorkInterface {
+func (uw *UnitWork) Increase(model interface{}, kvs map[string]int64, cond *Condition) UnitWorkInterface {
 	uw.increases = append(uw.increases, increaseUnit{model: model, kvMap: kvs, cond: cond})
 	return uw
 }
