@@ -83,7 +83,8 @@ func (f *Filter) applyPostgresQuery(query *orm.Query) *orm.Query {
 		return query.Where(f.Express)
 	}
 	if f.UseZero == false {
-		if reflect.ValueOf(f.Value).IsZero() {
+		rv := reflect.ValueOf(f.Value)
+		if rv.IsZero() || (rv.Kind() == reflect.Slice && rv.Len() == 0) {
 			return query
 		}
 	}
