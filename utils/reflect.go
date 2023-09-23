@@ -17,7 +17,7 @@ func FieldsNameByTag(v interface{}, tag string, export bool, more ...string) []s
 	fieldsCacheLocker.RLock()
 	if v, ok := fieldsCacheMapper[rt]; ok {
 		fieldsCacheLocker.RUnlock()
-		return v
+		return append(v, more...)
 	}
 	fieldsCacheLocker.RUnlock()
 	fieldsCacheLocker.Lock()
