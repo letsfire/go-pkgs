@@ -69,3 +69,17 @@ func SSliceDiff(ss1, ss2 []string) []string {
 	}
 	return res
 }
+
+func SSliceSame(ss1, ss2 []string) []string {
+	idx := make(map[string]struct{})
+	for _, s1 := range ss1 {
+		idx[s1] = struct{}{}
+	}
+	res := make([]string, 0)
+	for _, s2 := range ss2 {
+		if _, ok := idx[s2]; ok {
+			res = append(res, s2)
+		}
+	}
+	return res
+}
