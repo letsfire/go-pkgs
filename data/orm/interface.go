@@ -182,6 +182,13 @@ func (f *Filter) split(sep string) interface{} {
 
 func (f *Filter) string() string { return f.Value.(string) }
 
+func (f *Filter) Or(fs ...*Filter) *Where {
+	if len(fs) == 0 {
+		return AndWhere(nil, f)
+	}
+	return OrWhere(AndWhere(nil, f), fs...)
+}
+
 func (f *Filter) Condition(fields ...string) *Condition {
 	return AndWhere(nil, f).Condition(fields...)
 }
