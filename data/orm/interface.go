@@ -189,7 +189,12 @@ func (f *Filter) Condition(fields ...string) *Condition {
 // Filters 过滤集合
 type Filters []*Filter
 
-func (fs Filters) Or() *Where { return OrWhere(nil, fs...) }
+func (fs Filters) Or(fs2 ...*Filter) *Where {
+	if len(fs2) == 0 {
+		return OrWhere(nil, fs...)
+	}
+	return OrWhere(AndWhere(nil, fs2...), fs...)
+}
 
 func (fs Filters) And() *Where { return AndWhere(nil, fs...) }
 
